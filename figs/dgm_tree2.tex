@@ -1,0 +1,69 @@
+\documentclass[preview,border=0]{standalone}
+% \usepackage{fontspec}
+% \usepackage{xeCJK}
+\usepackage[paperheight=20cm,paperwidth=18cm]{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{kmath,kerkis}
+\usetikzlibrary{arrows.meta, positioning,shapes.multipart}
+% \setCJKmainfont{微軟正黑體}
+
+\begin{document}
+
+% \begin{tikzpicture}[
+%   level distance=1.5cm,
+%   sibling distance=2.5cm,
+%   every node/.style={font=\footnotesize},
+%   edge from parent/.style={draw, -{Latex[length=3mm]}, thick, > = stealth}, % Arrow style
+%   level 1/.style={sibling distance=3.5cm},
+%   level 2/.style={sibling distance=3cm},
+%   level 3/.style={sibling distance=2cm}
+% ]
+
+\begin{tikzpicture}[
+  thick, % line style
+  > = stealth, % arrow head style
+  edge from parent/.style={draw, -{Latex[length=3mm]}},
+  every text node part/.style={align=center},
+  level distance=1.5cm,
+  U/.style={circle, draw=white, inner sep=0pt, outer sep=1pt, minimum size=6mm},
+  % level 2/.style ={level distance=3cm},
+level 1/.style={sibling distance=3.2cm,level distance=1.7cm},
+level 2/.style={sibling distance=1.7cm,level distance=2.2cm},
+level 3/.style={sibling distance=1.5cm,level distance=1.9cm}
+]
+
+% Root node
+\node (R) {$\textrm{Child}_i$}
+  child { node(Im)[]{Item Invalid \\ ($k = 0$)}
+    child { node{ Typical\\ Hearing \\ ($z = 0$)} edge from parent[->] 
+        child{ node(A){``No''} edge from parent[->] }
+    }
+    child { node{Hearing \\ Loss \\ ($z = 1$)} edge from parent[->] 
+        child{ node(B){``No''} edge from parent[->] }
+    }
+    edge from parent[->]
+  }
+  child { node[]{Item Valid \\ ($k = 1$)}
+    child { node{Typical\\ Hearing \\ ($z = 0$)} edge from parent[->] 
+        child{ node(C){``No''} edge from parent[->] }
+    }
+    child { node{Hearing \\ Loss \\ ($z = 1$)} edge from parent[->] 
+        child{ node(D){``Yes''} edge from parent[->] }
+    }
+    edge from parent[->] 
+  };
+
+  	% Nodes and their relative positions
+    
+    \node[] (a) [below = .1 of A] {$\gamma_j$};
+    \node[] (b) [below = .1 of B] {$\gamma_j$};
+    \node[] (c) [below = .1 of C] {$G_j$};
+    \node[] (d) [below = .1 of D] {$1 - S_j$};
+
+    % \node[] (T1) [left = .3 of a] {\scriptsize $\textrm{P}(\textrm{``Yes''}|k,z)$};
+    % \node[] (T2) [left = of Im]   {\small $\textrm{Item}_j$};
+
+\end{tikzpicture}
+
+\end{document}
